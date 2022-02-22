@@ -13,18 +13,21 @@ class myassert:
 
         check_res = []
         """判断很多个预期结果的时候的一个空列表"""
-        check_list = ast.literal_eval(check_str)
-        for check in check_list:
-            actual = jsonpath.jsonpath(response_dict, check["expr"])
-            if isinstance(actual, list):
-                actual = actual[0]
-            if check["type"] == "eq":
-                check_res.append(actual == check["expected"])
+        try:
+            check_list = ast.literal_eval(check_str)
+            for check in check_list:
+                actual = jsonpath.jsonpath(response_dict, check["expr"])
+                if isinstance(actual, list):
+                    actual = actual[0]
+                if check["type"] == "eq":
+                    check_res.append(actual == check["expected"])
 
-        if False in check_res:
-            return False
-        else:
-            return True
+            if False in check_res:
+                return False
+            else:
+                return True
+        except:
+            print("上传文件不合法")
 
     def assert_db(self,check_db_str):
         check_db_res = []
