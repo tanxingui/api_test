@@ -4,9 +4,9 @@ from common.BaseApi import BaseApi
 
 
 class Request(BaseApi):
-    def request_api(self,url,data,token,sid,method='post',verify=False,timeout=10):
+    def request_api(self,url,data,token,sid):
         formdata=self.__get_formdata(data,token,sid)
-        return self.request(url, formdata,method=method,verify=verify,timeout=timeout)
+        return self.request(url, formdata)
 
     def __get_formdata(self, data, token, sid):
         sign3 = hashlib.md5((token + str(data)).encode("utf-8")).hexdigest()
