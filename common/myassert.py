@@ -35,13 +35,7 @@ class myassert:
         db = MyMysql()
         for check_db_dict in check_db_list:
             # 根据type来调用不同的方法来执行sql语句。
-            if check_db_dict["type"] == "count":
-                # 执行sql语句。查询结果是一个整数
-                res = db.get_count(check_db_dict["sql"])
-            elif check_db_dict["type"] == "eq":
-                res = db.get_many_data(check_db_dict["sql"])
-            else:
-                raise Exception
+            res=db.checkout_sql(check_db_dict)
             check_db_res.append(res == check_db_dict["expected"])
         if False in check_db_res:
             return False

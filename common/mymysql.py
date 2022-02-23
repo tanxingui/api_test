@@ -26,6 +26,17 @@ class MyMysql:
             return self.cur.fetchmany(size)
         else:
             return self.cur.fetchall()
+    def checkout_sql(self,check_db_dict):
+        #可以加增删改查sql 的type
+        if check_db_dict["type"] == "count":
+            # 执行sql语句。查询结果是一个整数
+            res = db.get_count(check_db_dict["sql"])
+        elif check_db_dict["type"] == "eq":
+            res = db.get_many_data(check_db_dict["sql"])
+        else:
+            raise Exception
+        return res
+
 
     def close_conn(self):
         self.cur.close()
