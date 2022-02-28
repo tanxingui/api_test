@@ -1,6 +1,5 @@
 import os
 
-import os
 
 # os.path.join()拼接路径
 path4 = os.path.join(os.path.dirname(os.path.abspath(__file__)), '1.py')
