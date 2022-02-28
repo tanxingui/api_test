@@ -1,18 +1,20 @@
 import hashlib
+from common.MyGlobal import Global
 from common.BaseApi import BaseApi
 
-
+MyGlobal=Global()
 
 class Request(BaseApi):
-    def request_api(self,url,data,token,sid):
-        formdata=self.__get_formdata(data,token,sid)
+    def request_api(self,url,data):
+        formdata=self.__get_formdata(data)
         return self.request(url, formdata)
 
-    def __get_formdata(self, data, token, sid):
-        sign3 = hashlib.md5((token + str(data)).encode("utf-8")).hexdigest()
+    def __get_formdata(self, data):
+        sign = hashlib.md5((MyGlobal.getToken() + str(data)).encode("utf-8")).hexdigest()
+        MyGlobal.setSign(sign)
         formdata = {
-            "sid": sid,
-            "sign": sign3,
+            "sid": MyGlobal.getLoginSid(),
+            "sign": MyGlobal.getSign(),
             "data": str(data)
         }
         return formdata
