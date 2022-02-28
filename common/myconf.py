@@ -1,6 +1,6 @@
 
 from configparser import ConfigParser
-#瓜瓜读取配置文件封装
+#读取配置文件封装
 
 class MyConf(ConfigParser):
 

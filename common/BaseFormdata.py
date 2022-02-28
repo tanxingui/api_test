@@ -19,11 +19,6 @@ class Request(BaseApi):
         }
         return formdata
 
-    # def getsidtoken(self):
-    #     sid = getattr(DATA, "sid")
-    #     token = getattr(DATA, "token")
-    #
-    #     return sid, token
 
     def eq(self):
         """"""
