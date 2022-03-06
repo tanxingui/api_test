@@ -1,9 +1,10 @@
 
 import requests
 import json
-
+from common.BaseRemind  import Remind
+MyRemind=Remind()
 class BaseApi(object):
-    """结合显示等待封装一些内置方法"""
+    """封装一些内置方法"""
     def request(self, url, data,method='post',verify=False,timeout=10):
         """request 请求api"""
         print('info:request api "{}"'.format(url))
@@ -28,14 +29,35 @@ class BaseApi(object):
                 print("只能支持post请求与get请求~")
         except AttributeError as e:
             print(e)
-    def assert_in(self):
+    def assert_all(self,actual,check):
         """alone assert"""
         "元素在元素中 返回True与False"
-    def assert_eq(self):
-        """alone assert"""
-        "元素在元素中"
-    def mysql_select(self):
-        """获取sql，返回result"""
+        if check["type"] == "eq":
+            return actual == check["expected"]
+        elif check["type"] == "in":
+            return check["expected"] in actual
+        else:
+            print("type类型错误~")
+            return False
+
+    def format_cases(self, cases):
+        """{"id":0,"url":"","case_name":"","header":"","method":"","body":"",
+                "expect":"","actual":"","valiadate":""},"""
+        """抛出异常"""
+        key_list = ["id", "url", "case_name", "header","method","body","expect","actual","valiadate"]
+        for index, tuple_data in enumerate(cases):
+            MyRemind.Exception_class(key_list, tuple_data)
+            cases[index] = self.format_list(tuple_data)
+        return cases
+
+    def format_list(self,tuple_data):
+        str_list = list(tuple_data)
+        for index, data in enumerate(str_list):
+            if type(data) == str:
+                mm = data.replace("\n", "")
+                str_list[index] = mm
+        return tuple(str_list)
+
 
 
 
