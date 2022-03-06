@@ -1,26 +1,20 @@
 import json
 import pytest
-import jsonpath
 from common.MyGlobal import Global
 from common.BaseFormdata import Request
-from case.conftest import getloginsign
+from common.MyExcel_ import ExcelUtil
 MyRequest=Request()
 MyGlobal=Global()
-class Test_api:
-    def __init__(self):
-        token, sid = getloginsign()
-        MyGlobal.setLoginSid(sid)
-        MyGlobal.setToken(token)
-    def test_api_01(self):
-        data='{"page_id":1,"page_size":10,"querys":[{"col":"name","cond":"like","val":"深圳市科治好连锁有限公司"}]}'
-        url="http://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/chain_corp/list"
-        MyRequest.request_api(url,data)
-        # print(json.dumps(result.json(), indent=2, ensure_ascii=False))
-        # json3 = jsonpath.jsonpath(result.json(), "$..name")
+MyExcel=ExcelUtil("/Users/luzhihao/api_test/data/api_demo.xlsx")
 
-if __name__ == '__main__':
-    t1=Test_api()
-    t1.test_api_01()
+class Test_api:
+    """志豪调用后返回的是一个[{"cases":[{dict}]}]"""
+    @pytest.mark.parametrize("excel",MyExcel.read_excel()[0]["cases"])
+    def test_api_01(self,getloginsign,excel):
+        data=excel["body"]
+        url=excel["url"]
+        MyRequest.request_api(url,data,expect=excel["expect"],run_result_txt=excel["valiadate"],id=excel["id"])
+
 
 
 

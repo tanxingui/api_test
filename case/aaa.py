@@ -1,5 +1,8 @@
 import jsonpath
 import json
+# from common.MyExcel_ import ExcelUtil
+from openpyxl import Workbook,load_workbook
+
 
 json1={ "store": {
            "book": [
@@ -32,9 +35,21 @@ json1={ "store": {
     }
   }
 }
+aaa=jsonpath.jsonpath(json1,"$.store.book[0].price")
+bbb=(1,"aaaw\n","ww\n",None)
+ddd=(2,"dddw\n","ww\n",None)
+ccc=[bbb,ddd]
+# print(str(bbb))
+# print(str(ccc))
+# ll = [str(x).strip() for x in ccc if str(x).strip()!= '']
 
-print(type(json1))
-json3=jsonpath.jsonpath(json1,"$..*")
-print(json3)
-print(json.dumps(json3[0], indent=2))
+
+print(pan(ccc))
+
+
+
+
+
+
+
 

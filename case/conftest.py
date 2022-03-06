@@ -1,12 +1,17 @@
 import pymysql
+import pytest
 from data.login_data import LoginData
 from common.BaseApi import BaseApi
+
+from common.MyGlobal import Global
+
+MyGlobal=Global()
 
 MyRequest=BaseApi()
 login_data=LoginData
 send_success_data=login_data.login_success_data
 
-
+@pytest.fixture(scope="function")
 def getloginsign():
     username,password=send_success_data[0]
     data = {
@@ -22,6 +27,8 @@ def getloginsign():
     # 获取token值
     token = result.json()["result"]["token"]
     sid = result.json()["result"]["sid"]
+    MyGlobal.setLoginSid(sid)
+    MyGlobal.setToken(token)
     return token, sid
 
 
