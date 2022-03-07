@@ -11,7 +11,7 @@ MyRequest=BaseApi()
 login_data=LoginData
 send_success_data=login_data.login_success_data
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="class")
 def getloginsign():
     username,password=send_success_data[0]
     data = {

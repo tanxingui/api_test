@@ -1,7 +1,7 @@
 import pymysql
-from common.myconf import MyConf
+from config.myconf import MyConf
 import os
-from common.mypath import conf_dir
+from config.mypath import conf_dir
 class MyMysql:
 
     def __init__(self):
