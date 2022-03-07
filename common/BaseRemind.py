@@ -1,4 +1,5 @@
 """提示类"""
+import jsonpath
 class Remind:
 
     def Exception_class(self,key_list, data):
@@ -29,6 +30,15 @@ class Remind:
         elif data[8] != None and type(data[8]) != str:
             self.format_error(key_list[8], str)
             raise
+        elif data[9] != None and type(data[9]) != str:
+            self.format_error(key_list[9], str)
+            raise
+        elif data[10] != None and type(data[10]) != str:
+            self.format_error(key_list[10], str)
+            raise
 
     def format_error(self,key, type):
         print(f"{key}值为空或者数据格式不是{type}")
+    def response_info(self,id,dict):
+        print(f"用例id为{id:->15}")
+        print(f'errcode:{jsonpath.jsonpath(dict, "$..errcode")[0]}')

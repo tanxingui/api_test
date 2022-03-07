@@ -12,7 +12,7 @@ class ExcelUtil(BaseApi):
     def __init__(self, excel_path):
         self.wb = load_workbook(excel_path)
         self.template = """{"id":0,"url":"","case_name":"","header":"","method":"","body":"",
-        "expect":"","actual":"","valiadate":""},"""  # 这个是写入用例的模板
+        "expect":"","actual":"","valiadate":"","is_replace":"","is_perform":""},"""  # 这个是写入用例的模板
 
     @exception_utils
     def read_excel(self):
@@ -30,7 +30,7 @@ class ExcelUtil(BaseApi):
             bbb = [i for i, case in enumerate(case_list_3) if case[0] == None]
             case_list_2 = [v for i, v in enumerate(case_list_3) if i not in bbb]
             # 处理列超过10的空值
-            case_list_4 = [case[:9] for case in case_list_2 if len(case) > 10]
+            case_list_4 = [case[:11] for case in case_list_2 if len(case) > 12]
             del case_list_3
             del case_list_2
             cases_num = len(case_list_4) # 一个sheet中用例的数量
@@ -50,6 +50,8 @@ class ExcelUtil(BaseApi):
                 cases_template_list[i]['expect'] = case_list[i][6]
                 cases_template_list[i]['actual'] = case_list[i][7]
                 cases_template_list[i]['valiadate'] = case_list[i][8]
+                cases_template_list[i]['is_replace'] = case_list[i][9]
+                cases_template_list[i]['is_perform'] = case_list[i][10]
 
             value.append({"cases": cases_template_list})
 

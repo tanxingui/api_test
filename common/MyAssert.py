@@ -22,26 +22,29 @@ class MyAssert(BaseApi):
 ]
 """
     @exception_utils
-    def assert_expect(self,expect,response_dict):
+    def assert_expect(self,id,expect,actual,response_dict):
         """调用的时候先传入表格列表字段预期结果的数据，再传入返回结果的字典"""
         if expect==None:
             print("预期为None，没有执行断言~")
             return False
         else:
             try:
-                check_list = ast.literal_eval(expect)
-                print(len(check_list))
-                for index,check in enumerate(check_list):
+                print('info:用例 id "{}"'.format(id))
+                expect_list = ast.literal_eval(expect)
+                actual_list = ast.literal_eval(actual)
+                assert_list=self.merge_list_dict(expect_list,actual_list)
+                for index,check in enumerate(assert_list):
                     actual = jsonpath.jsonpath(response_dict, check["expr"])
                     if self.assert_all(actual,check):
-                        if index==len(check_list)-1:
+                        print(f'info:第{index+1}次断言结果为 "{self.assert_all(actual,check)}"')
+                        if index==len(expect_list)-1:
                             return True
                         else:
                             continue
                     else:
                         return False
             except:
-                print("上传文件不合法")
+                print("上传文件不合法,请检查expect与actual的数据格式")
 
 
     def assert_db(self,expect):
