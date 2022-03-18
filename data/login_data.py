@@ -9,6 +9,12 @@ class LoginData(object):
             "123456"
         )
     ]
+    login_xingui_data=[
+        (
+            "tanxingui",
+            "1"
+        )
+    ]
 
     login_fail_data = [
         (

@@ -3,6 +3,17 @@ import json
 # from common.MyExcel_ import ExcelUtil
 from openpyxl import Workbook,load_workbook
 import re
+import random
+import hashlib
+from faker import   Faker
+faker=Faker("zh_CN")
+
+
+token1="688801527976073224"
+requestdata='{"order_id":92,"amount":500,"code":"071LDg100OCnvN1G5t2007SfLr1LDg17"}'
+sign1=hashlib.md5((token1+requestdata).encode("utf-8")).hexdigest()
+print(sign1)
+
 
 json1={ "store": {
            "book": [
@@ -42,11 +53,14 @@ json111='{"errcode":0,"result":{"page":1,"size":15,"total_size":168,"total_page"
 # print(str(ccc))
 # ll = [str(x).strip() for x in ccc if str(x).strip()!= '']
 
-aaaa='{"name":"$#id3#","value":"$#id#"}'
-k=2
-for i in range(k):
-    k=k+1
-    print(i)
+
+
+
+
+
+
+
+
 
 
 
