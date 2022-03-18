@@ -1,10 +1,15 @@
 import jsonpath
 import ast
-
+import random
+import re
+from common.MyException import exception_utils
+from faker import Faker
+faker=Faker()
 class Replace_data():
     instance = None
     init_flag = None
-    name={}
+    replace_dict={}
+    rely_list=[]
     def __new__(cls, *args, **kwargs):
         if cls.instance is None:
             cls.instance = super().__new__(cls)
@@ -16,39 +21,71 @@ class Replace_data():
             return
         Replace_data.init_flag = True
     """目前只支持提取第一个"""
-    def add_name(self,key,name):
-        self.name[key]=name
-    def get_name(self,key):
-        return self.name[key]
-    def replace_case_with_re(self, id,Data):
+    def add_replace_dict(self,key,replace_dict):
+        self.replace_dict[key]=replace_dict
+    def get_replace_dict(self,key):
+        return self.replace_dict[key]
+    def get_random_int(self):
+         pass
+    def get_random_phone(self):
+        return faker.phone_number()
+    def get_random_name(self):
+        return faker.name()
+    @exception_utils
+    def replace_case_with_re(self,Data,is_replace):
         """{"id":"$#15_0#","name":"$#15_1#"}"""
         if Data.count("$")==0:
             return Data
         else:
+            self.set_rely_list(is_replace)
             num=Data.count("$")
+            # aaa=self.rely_list
+            index = 0
             for i in range(num):
-                """id-1 只适配上一个接口就为目标接口的情况"""
-                if f"$#{id-1}_{i}#" in Data:
-                    Data=Data.replace(f"$#{id-1}_{i}#",f"{self.get_name(f'{id-1}_{i}')}")
-                    if i+1==num:
-                        return Data
-                    else:
-                        continue
+                """随时调用字典的值"""
+
+                if "$#phone#" in Data:
+                    Data = Data.replace(f"$#phone#", f"{self.get_random_phone()}")
+
+                elif "$#name#" in Data:
+                    Data = Data.replace(f"$#name#", f"{self.get_random_name()}")
+
+                elif f"$#{self.rely_list[index]}#" in Data:
+
+                    Data=Data.replace(f"$#{self.rely_list[index]}#",f"{self.get_replace_dict(f'{self.rely_list[index]}')}")
+                    #解决一个data有两个相同参数的情况
+                    if index+1 < len(self.rely_list):
+                        index += 1
+
+                #判断是否最后一个替换
+                if i + 1 == num:
+                    return Data
                 else:
-                    print(f"id{id}替换表达式的格式错误~")
-                    raise
+                    continue
 
-    def extract_data(self,id,expect,result_dict):
-        expect_list = ast.literal_eval(expect)
-
-        for index,i in enumerate(expect_list):
+    @exception_utils
+    def extract_data(self,result_dict,is_replace):
+        is_replace_list = ast.literal_eval(is_replace)
+        for index,i in enumerate(is_replace_list):
             """判断是否需要替换"""
             if i["is_extract"] ==1:
                 name=jsonpath.jsonpath(result_dict,i["extract_expr"])
-                self.add_name(str(id)+"_"+str(index),name[0])
+                key=i["rely"]
+                if type(name)==bool:
+                    print(f"jsonpath表达式没有定位到{key}的数据")
+                    self.add_replace_dict(key,"")
+                else:
+                    self.add_replace_dict(key,name[0])
 
-            else:
-                pass
+    @exception_utils
+    def set_rely_list(self,is_replace):
+        """设置依赖id列表"""
+        is_replace_list = ast.literal_eval(is_replace)
+        for index, dict in enumerate(is_replace_list):
+            if dict.get("rely_list") != None:
+                self.rely_list = dict.get("rely_list")
+
+
 
 
 

@@ -1,6 +1,9 @@
 
+<<<<<<< HEAD
 
 from case.test_api import *
+=======
+>>>>>>> dev/dev-220228
 
 if __name__ == '__main__':
     t1=Test_api()

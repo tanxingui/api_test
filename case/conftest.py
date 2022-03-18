@@ -10,10 +10,12 @@ MyGlobal=Global()
 MyRequest=BaseApi()
 login_data=LoginData
 send_success_data=login_data.login_success_data
+# send_xingui_data=login_data.login_xingui_data
 
 @pytest.fixture(scope="class")
 def getloginsign():
     username,password=send_success_data[0]
+    # username, password = send_xingui_data[0]
     data = {
         "data": '{'
                 '"username":"' + username + '",'

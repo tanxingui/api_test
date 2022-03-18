@@ -1,5 +1,6 @@
 """提示类"""
 import jsonpath
+
 class Remind:
 
     def Exception_class(self,key_list, data):
@@ -33,7 +34,7 @@ class Remind:
         elif data[9] != None and type(data[9]) != str:
             self.format_error(key_list[9], str)
             raise
-        elif data[10] != None and type(data[10]) != str:
+        elif type(data[10]) != int or data[10] == None:
             self.format_error(key_list[10], str)
             raise
 
@@ -42,3 +43,13 @@ class Remind:
     def response_info(self,id,dict):
         print(f"用例id为{id:->15}")
         print(f'errcode:{jsonpath.jsonpath(dict, "$..errcode")[0]}')
+    def request_error(self,data):
+        print("请检查url是否输入正确")
+        print(data)
+    def ex_error(self,data):
+        print('出现异常，error is %s\n%s' % (data))
+    def param_error(self):
+        return "参数错误"
+
+    def param_ok(self,data):
+        return '你好，志豪，今天过得怎么样？已完成创建'+data+"数据"

@@ -13,8 +13,7 @@ class BaseApi(object):
             if method.upper() == "GET":
                 result=requests.request(method=method,url=url,params=data,verify=verify,timeout=timeout)
                 if "请重新登录" in str(result.json()):
-
-                    print("请检查url是否输入正确")
+                    MyRemind.request_error(data)
 
                 else:
                     pass
@@ -23,11 +22,11 @@ class BaseApi(object):
             elif method.upper() == "POST":
                 result = requests.request(method=method, url=url, data=data, verify=verify, timeout=timeout)
                 if "请重新登录" in str(result.json()):
-                    print("请检查url是否输入正确")
+                    MyRemind.request_error(data)
                     print(data)
                 else:
                     pass
-                # print(json.dumps(result.json(), indent=2, ensure_ascii=False))
+                print(json.dumps(result.json(), indent=2, ensure_ascii=False))
                 return result
             else:
                 print("只能支持post请求与get请求~")
@@ -40,6 +39,7 @@ class BaseApi(object):
             return actual == check["expected"]
         elif check["type"] == "in":
             return check["expected"] in actual
+
         else:
             print("type类型错误~")
             return False

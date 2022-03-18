@@ -1,0 +1,7 @@
+Faker==13.3.1
+Flask==2.0.3
+jsonpath==0.82
+openpyxl==3.0.9
+PyMySQL==0.9.3
+pytest==6.2.5
+requests==2.26.0
