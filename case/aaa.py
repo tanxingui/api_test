@@ -1,5 +1,6 @@
 import jsonpath
 import json
+import os
 # from common.MyExcel_ import ExcelUtil
 from openpyxl import Workbook,load_workbook
 import re
@@ -12,7 +13,7 @@ faker=Faker("zh_CN")
 token1="688801527976073224"
 requestdata='{"order_id":92,"amount":500,"code":"071LDg100OCnvN1G5t2007SfLr1LDg17"}'
 sign1=hashlib.md5((token1+requestdata).encode("utf-8")).hexdigest()
-print(sign1)
+# print(sign1)
 
 
 json1={ "store": {
@@ -55,11 +56,13 @@ json111='{"errcode":0,"result":{"page":1,"size":15,"total_size":168,"total_page"
 
 
 
+path='/Users/luzhihao/api_test'
+name='README.md'
+basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(basedir)
 
-
-
-
-
+report_dir = os.path.join(path, "report", "reports")
+print(report_dir)
 
 
 

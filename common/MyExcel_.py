@@ -1,14 +1,14 @@
 from openpyxl import Workbook,load_workbook
 from common.MyException import exception_utils
 from common.BaseApi import BaseApi
-
+from common.BaseRemind import Remind
+MyRemind=Remind()
 @exception_utils
 class ExcelUtil(BaseApi):
     """封装操作excel的方法，主要作用2个：
 1、用于数据处理，读取excel中用例后返回规定的字典，便于生成yaml
 2、将运行结果数据存入excel中对应列
 """
-
     def __init__(self, excel_path):
         self.wb = load_workbook(excel_path)
         self.template = """{"id":0,"url":"","case_name":"","header":"","method":"","body":"",
@@ -20,27 +20,15 @@ class ExcelUtil(BaseApi):
         value = []
         for sheetname in self.wb.sheetnames:
             ws = self.wb[sheetname]
-            case_list_3 = list(ws.values)
-            """# 志豪获得id为空的case的索引
-               # 新列表的概念
-               # 志豪取前10位成一个新列表
-            """
-            case_list_3.pop(0)  # 去掉表头
-            # 处理行id为空的值
-            bbb = [i for i, case in enumerate(case_list_3) if case[0] == None]
-            case_list_2 = [v for i, v in enumerate(case_list_3) if i not in bbb]
-            # 处理列超过10的空值
-            case_list_4 = [case[:11] for case in case_list_2 if len(case) > 12]
-            del case_list_3
-            del case_list_2
-            cases_num = len(case_list_4) # 一个sheet中用例的数量
-
+            case_list_excel = list(ws.values)
+            #格式处理器 变更模板需要变更格式处理器
+            case_list = MyRemind.Excel_manage(case_list_excel)
+            cases_num = len(case_list) # 一个sheet中用例的数量
             cases_template = self.template * cases_num
             cases_template_list = eval("[" + cases_template[:-1] + "]")   # 与用例相同长度的模板
-            case_list=self.format_cases(case_list_4)
 
             for i in range(len(case_list)):  # i：第i个用例
-                # 每个用例中字段是9个，因此这样写
+                # 每个用例中字段是11个，因此这样写
                 cases_template_list[i]['id'] = case_list[i][0]
                 cases_template_list[i]['url'] = case_list[i][1]
                 cases_template_list[i]['case_name'] = case_list[i][2]
