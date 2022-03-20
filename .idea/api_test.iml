@@ -15,7 +15,7 @@
   <component name="PyNamespacePackagesService">
     <option name="namespacePackageFolders">
       <list>
-        <option value="$MODULE_DIR$/demo_flask" />
+        <option value="$MODULE_DIR$/report/result" />
       </list>
     </option>
   </component>

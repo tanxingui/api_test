@@ -1,11 +1,11 @@
 import pymysql
 from config.myconf import MyConf
 import os
-from config.mypath import conf_dir
+from config.mypath import path_dir
 class MyMysql:
 
     def __init__(self):
-        conf = MyConf(os.path.join(conf_dir, "mysql.ini"))
+        conf = path_dir
         self.db = pymysql.connect(
             host=conf.get("mysql", "host"),
             user=conf.get("mysql", "user"),

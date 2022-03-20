@@ -18,6 +18,5 @@ class MyConf():
         MyConf.init_flag = True
     def setConf(self,path):
         self.conf=path
-        print(f"当前conf为{self.conf}")
     def getConf(self):
         return self.conf

@@ -1,8 +1,14 @@
 
 import requests
 import json
+import hashlib
+from common.MyGlobal import Global
+from common.BaseReplace import Replace_data
 from common.BaseRemind  import Remind
+from common.MyException import exception_utils
 MyRemind=Remind()
+MyReplace=Replace_data()
+MyGlobal=Global()
 class BaseApi(object):
     """封装一些内置方法"""
     def request(self, url, data,method='post',verify=False,timeout=10):
@@ -32,6 +38,19 @@ class BaseApi(object):
                 print("只能支持post请求与get请求~")
         except AttributeError as e:
             print(e)
+
+    @exception_utils
+    def get_formdata(self, data, is_replace):
+        data = MyReplace.replace_case_with_re(data, is_replace)
+        sign = hashlib.md5((MyGlobal.getToken() + data).encode("utf-8")).hexdigest()
+        MyGlobal.setSign(sign)
+        formdata = {
+            "sid": MyGlobal.getLoginSid(),
+            "sign": MyGlobal.getSign(),
+            "data": data
+        }
+        return formdata
+
     def assert_all(self,actual,check):
         """alone assert"""
         "元素在元素中 返回True与False"
@@ -44,23 +63,6 @@ class BaseApi(object):
             print("type类型错误~")
             return False
 
-    def format_cases(self, cases):
-        """{"id":0,"url":"","case_name":"","header":"","method":"","body":"",
-        "expect":"","actual":"","valiadate":"","is_replace":"","is_perform":""},"""
-        """抛出异常"""
-        key_list = ["id", "url", "case_name", "header","method","body","expect","actual","valiadate"]
-        for index, tuple_data in enumerate(cases):
-            MyRemind.Exception_class(key_list, tuple_data)
-            cases[index] = self.format_list(tuple_data)
-        return cases
-
-    def format_list(self,tuple_data):
-        str_list = list(tuple_data)
-        for index, data in enumerate(str_list):
-            if type(data) == str:
-                mm = data.replace("\n", "")
-                str_list[index] = mm
-        return tuple(str_list)
     def merge_list_dict(self,list_dict1,list_dict2):
         new_list_dict=[]
         for i in range(len(list_dict1)):
