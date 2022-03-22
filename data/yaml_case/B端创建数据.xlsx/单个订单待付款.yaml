@@ -1,0 +1,13 @@
+cases:
+- id: 3
+  url: /iyourcar_autobuy/backend/apollo/user_order/set
+  case_name: 新建单个车型订单
+  header: null
+  method: post
+  body: '{"client":1,"company":"北京有车以后信息科技有限公司","name":"卢志豪接口测试","identity":"","deliver_time":"","province_id":"","city_id":"","region":1,"invoice_type":1,"insurance_type":1,"balance_type":1,"is_whole_order":0,"deposit_price":800000,"balance_price":21900000,"buyer_user_id":46988,"remark":"#店车店票#
+    #店内出交强#","orderCarModels":[{"guide_price":23200000,"model_id":33394,"body_color":"红色和黑色","inner_color":"","number":1,"price":22700000}]}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{"is_extract":0}]'
+  is_perform: 1

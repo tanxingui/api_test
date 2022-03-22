@@ -1,0 +1,57 @@
+cases:
+- id: 8
+  url: /iyourcar_autobuy/backend/apollo/user_order/set
+  case_name: 新建整版车型订单
+  header: null
+  method: post
+  body: '{"client":1,"company":"北京有车以后信息科技有限公司","name":"卢志豪自动化测试数据","identity":"","deliver_time":"","province_id":"","city_id":"","region":1,"invoice_type":1,"insurance_type":1,"balance_type":1,"is_whole_order":1,"remark":"#店车店票#
+    #店内出交强#","orderCarModels":[{"model_id":30537,"body_color":"蓝色","inner_color":"","number":1,"guide_price":186800000,"price":181800000},{"model_id":27292,"body_color":"阿布扎比蓝","inner_color":"","number":2,"guide_price":92700000,"price":86700000}],"deposit_price":300000,"balance_price":354900000,"buyer_user_id":46988}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{"is_extract":0}]'
+  is_perform: 1
+- id: 4
+  url: /iyourcar_autobuy/backend/apollo/user_order/list
+  case_name: 我的B端订单列表
+  header: null
+  method: post
+  body: '{"page_id":1,"page_size":15,"querys":[{"col":"create_user_id","val":46988,"cond":"equalTo"}]}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{"is_extract":1,"extract_expr":"$.result.list[0].id","rely":"4_id"}]'
+  is_perform: 1
+- id: 5
+  url: /iyourcar_autobuy/backend/apollo/user_order/transfer_vouchers
+  case_name: 上传支付凭证
+  header: null
+  method: post
+  body: '{"id":"$#4_id#","transfer_vouchers":"http://82.157.156.74/luzhihao.jpeg","user_id":46760}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{    "is_extract":0,    "rely_list":[        "4_id"    ]}]'
+  is_perform: 1
+- id: 6
+  url: /iyourcar_autobuy/backend/user_assets/transfer_audit/list
+  case_name: 审核列表
+  header: null
+  method: post
+  body: '{"page_id":1,"page_size":10,"querys":[]}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{    "is_extract":1,    "extract_expr":"$.result.list[0].id",    "rely":"6_id"},{    "is_extract":1,    "extract_expr":"$.result.list[0].receivable_amount",    "rely":"6_receivable_amount"}]'
+  is_perform: 1
+- id: 7
+  url: /iyourcar_autobuy/backend/user_assets/transfer_audit/audit
+  case_name: 审核接口
+  header: null
+  method: post
+  body: '{    "id":"$#6_id#",    "status":"2",    "arrival_amount":"$#6_receivable_amount#",    "receive_payment_channel":"123",    "receive_payment_no":"123",    "remark":""}'
+  expect: null
+  actual: null
+  valiadate: /Users/luzhihao/api_test/report/result/result.txt
+  is_replace: '[{    "is_extract":0,    "rely_list":[        "6_id","6_receivable_amount"    ]}]'
+  is_perform: 1
