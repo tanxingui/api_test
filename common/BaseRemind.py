@@ -69,7 +69,7 @@ class Remind:
         case_id_None = [i for i, case in enumerate(case_list) if case[0] == None]
         case_list_new = [v for i, v in enumerate(case_list) if i not in case_id_None]
         # 取excel前十一位的值 *
-        case_list_11 = [case[:11] for case in case_list_new if len(case) > 12]
+        case_list_11 = [case[:11] for case in case_list_new ]
         del case_list
         del case_list_new
         return case_list_11

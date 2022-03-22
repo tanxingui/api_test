@@ -32,7 +32,7 @@ class BaseApi(object):
                     print(data)
                 else:
                     pass
-                print(json.dumps(result.json(), indent=2, ensure_ascii=False))
+                # print(json.dumps(result.json(), indent=2, ensure_ascii=False))
                 return result
             else:
                 print("只能支持post请求与get请求~")
@@ -69,6 +69,8 @@ class BaseApi(object):
             list_dict1[i] |= list_dict2[i]
             new_list_dict.append(list_dict1[i])
         return new_list_dict
+
+
 
 
 

@@ -16,6 +16,8 @@
     <option name="namespacePackageFolders">
       <list>
         <option value="$MODULE_DIR$/report/result" />
+        <option value="$MODULE_DIR$/report/allure" />
+        <option value="$MODULE_DIR$/data/yaml_case" />
       </list>
     </option>
   </component>
