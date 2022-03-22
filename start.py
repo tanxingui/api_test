@@ -1,13 +1,16 @@
-
-<<<<<<< HEAD
-
+import pytest
+import os
+import time
+from common.yaml_util import *
+from config.mypath import *
+from common.text_util import *
 from case.test_api import *
-=======
->>>>>>> dev/dev-220228
 
+# tempdir_path = "report/allure/temp/%stemp" % time.strftime("%y%m%d-%H%M%S")
 if __name__ == '__main__':
-    t1=Test_api()
-    t1.test_api_01()
+    handler("B端创建数据.xlsx")
+    truncate_txt("%s/report/result/result.txt" % base_dir)
+
     path = "case/test_api.py"
     args = ["-v", "./" + path]
     pytest.main(args)

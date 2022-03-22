@@ -1,6 +1,5 @@
 from pathlib import Path
-
-base_dir = Path(__file__).parent.parent
+from config.mypath import *
 
 
 def read_txt(text_file):

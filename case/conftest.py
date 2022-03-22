@@ -9,7 +9,7 @@ MyGlobal=Global()
 MyRequest=BaseApi()
 login_data=LoginData
 send_success_data=login_data.login_success_data
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def getloginsign():
     username,password=send_success_data[0]
     data = {
@@ -28,6 +28,21 @@ def getloginsign():
     MyGlobal.setLoginSid(sid)
     MyGlobal.setToken(token)
     return token, sid
+
+# @pytest.fixture(scope='session', autouse=True)
+# def truncate():
+#     """运行用例前清空data下的相关文件"""
+#     print("\n用例运行前操作：")
+#     print("1.清空run_result.txt文件")
+#     truncate_txt("%s/data/run_result.txt" % base_dir)
+#     print("2.清空extract_save.txt文件")
+#     truncate_txt("%s/data/extract_save.txt" % base_dir)
+#     print("3.清空extract_replace.txt文件")
+#     truncate_txt("%s/data/extract_replace.txt" % base_dir)
+#     print("4.清空extract.ymal文件")
+#     truncate_txt("%s/data/data_driven_yaml/extract.yaml" % base_dir)
+#     yield
+#     print("用例运行完毕，这是后置")
 
 
 

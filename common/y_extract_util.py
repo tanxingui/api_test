@@ -5,8 +5,8 @@ from common.yaml_util import *
 
 
 @exception_utils
-def extract_util(case_file, extract_yamlfile="%s/data/data_driven_yaml/extract.yaml" % base_dir,
-                 default_yamlfile="%s/data/data_driven_yaml/default_variable.yaml" % base_dir):
+def extract_util(case_file, extract_yamlfile="%s/data/data_driven_yaml/extract.yaml_case" % base_dir,
+                 default_yamlfile="%s/data/data_driven_yaml/default_variable.yaml_case" % base_dir):
     """
     数据关联的公共方法
     思路:
@@ -66,7 +66,7 @@ def save_variable(key, value):
     """保存变量到extract.yaml文件，需要模块运行前先进行清空"""
     # 1.数据按格式追加写入extract_save.txt文件
     file = '%s/data/extract_save.txt' % base_dir
-    extract_yamlfile = "%s/data/data_driven_yaml/extract.yaml" % base_dir
+    extract_yamlfile = "%s/data/data_driven_yaml/extract.yaml_case" % base_dir
     write_txt(file, '"%s":"%s",' % (key, value))
     variable = eval("{%s}" % read_txt(file)[0:-1])
     write_yaml(data=variable, yaml_file=extract_yamlfile)

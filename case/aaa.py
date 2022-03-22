@@ -6,7 +6,9 @@ from openpyxl import Workbook,load_workbook
 import re
 import random
 import hashlib
+import yaml
 from faker import   Faker
+
 faker=Faker("zh_CN")
 
 
@@ -54,15 +56,25 @@ json111='{"errcode":0,"result":{"page":1,"size":15,"total_size":168,"total_page"
 # print(str(ccc))
 # ll = [str(x).strip() for x in ccc if str(x).strip()!= '']
 
-
-
-path='/Users/luzhihao/api_test'
-name='README.md'
-basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(basedir)
-
-report_dir = os.path.join(path, "report", "reports")
-print(report_dir)
+# bath_path="/Users/luzhihao/api_test/data/yaml_case"
+# dir_list1 = os.listdir(bath_path)
+# print(dir_list1)
+list1=[{"name":1},{"mm":4}]
+list2=[{"nam2":2}]
+list3=[]
+for i in list1:
+    list3.append(i)
+for i in list2:
+    list3.append(i)
+print(list3)
+# def build_data():
+#     #单个订单待付款
+#     file_name="../data/yaml_case/case_demo.yaml"
+#     with open(file_name,"r",encoding="utf-8") as f:
+#         data = yaml.load(f,Loader=yaml.FullLoader)
+#         print(data)
+#
+# build_data()
 
 
 
