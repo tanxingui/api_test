@@ -56,13 +56,20 @@ class MyAssert(BaseApi):
         """alone assert"""
         "元素在元素中 返回True与False"
         actual=jsonpath.jsonpath(response_json, assert_dict["actual"]["expr"]) #actual逻辑处理
+        #没有定位到jsonpath
+        if actual==False:
+            return False
         log_text3 = "assert_type:%s，actual:%s，expected:%s" % (assert_dict["type"],actual,assert_dict["expected"])
         MyLog.info(log_text3)
-        if assert_dict["type"] == "eq":  #断言逻辑处理
+        if assert_dict["type"]==""  or  assert_dict["expected"]=="":
+            return False
+        elif assert_dict["type"] == "eq":  #断言逻辑处理
             return assert_dict["expected"] == actual
 
         elif assert_dict["type"] == "in":
-            return assert_dict["expected"] in actual
+            for i in actual:
+                if assert_dict["expected"] in i:
+                    return True
 
         elif assert_dict["type"] == "sum":
             return assert_dict["expected"] == sum(actual)

@@ -8,7 +8,7 @@ from case.test_api import *
 
 # tempdir_path = "report/allure/temp/%stemp" % time.strftime("%y%m%d-%H%M%S")
 if __name__ == '__main__':
-    handler("B端创建数据.xlsx")
+    # handler("B端创建数据.xlsx")
     truncate_txt("%s/report/result/result.txt" % base_dir)
 
     path = "case/test_api.py"

@@ -1,8 +1,10 @@
+import time
+
 import pymysql
 import pytest
 from data.login_data import LoginData
 from common.BaseApi import BaseApi
-
+import os
 from common.MyGlobal import Global
 
 MyGlobal=Global()
@@ -27,7 +29,7 @@ def getloginsign():
     sid = result.json()["result"]["sid"]
     MyGlobal.setLoginSid(sid)
     MyGlobal.setToken(token)
-    return token, sid
+    yield
 
 # @pytest.fixture(scope='session', autouse=True)
 # def truncate():

@@ -1,5 +1,6 @@
 """提示类 格式校验类"""
 import jsonpath
+import re
 
 class Remind:
     def Excel_manage(self,case_list):
@@ -86,9 +87,19 @@ class Remind:
             for index, data in enumerate(str_list):
                 if type(data) == str:
                     mm = data.replace("\n", "").replace(" ", "").replace("，",",")
-                    str_list[index] = mm
+                    str_list[index] = self.format_time(mm)
             case_list[case_index]=tuple(str_list)
         return case_list
+
+    def format_time(self,str):
+        mmm = re.findall('time":"(.*?)"', str)
+        if mmm==[]:
+            return str
+        else:
+            for index, data in enumerate(mmm):
+                mmm_sub = mmm[index][:10] + " " + mmm[index][10:]
+                str = re.sub(mmm[index], mmm_sub, str)
+            return str
     def format_excel_list(self,case_list):
         """获取到数居前的一个处理"""
         # 去掉表头

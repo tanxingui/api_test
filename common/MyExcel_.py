@@ -1,8 +1,13 @@
-from openpyxl import Workbook,load_workbook
+#encoding=utf-8
+from openpyxl import load_workbook
 from common.MyException import exception_utils
 from common.BaseApi import BaseApi
-from common.BaseRemind import Remind
+from checkout.BaseRemind import Remind
+from common.BaseDriver import BaseDriver
+from config.mypath import *
+
 MyRemind=Remind()
+MyDriver=BaseDriver()
 @exception_utils
 class ExcelUtil(BaseApi):
     """封装操作excel的方法，主要作用2个：
@@ -11,8 +16,9 @@ class ExcelUtil(BaseApi):
 """
     def __init__(self, excel_path):
         self.wb = load_workbook(excel_path)
-        self.template = """{"id":0,"url":"","case_name":"","header":"","method":"","body":"",
-        "expect":"","actual":"","valiadate":"","is_replace":"","is_perform":""},"""  # 这个是写入用例的模板
+        self.template = """{"case_name":"","precondition":"","step":"","request_list":"","assert":""},"""  # 这个是写入用例的模板
+        self.common_template="""{"id":0,"api_name":"","url":"","method":"","body":"","is_replace":""},"""  # 这个是公共用例的模板
+
 
     @exception_utils
     def read_excel(self):
@@ -21,30 +27,55 @@ class ExcelUtil(BaseApi):
         for sheetname in self.wb.sheetnames:
             ws = self.wb[sheetname]
             case_list_excel = list(ws.values)
-            #格式处理器 变更模板需要变更格式处理器
             case_list = MyRemind.Excel_manage(case_list_excel)
-            cases_num = len(case_list) # 一个sheet中用例的数量
-            cases_template = self.template * cases_num
+            cases_template = self.template * len(case_list)
             cases_template_list = eval("[" + cases_template[:-1] + "]")   # 与用例相同长度的模板
+            common_value=ExcelUtil(excel_dir+"/common.xlsx").read_common()
 
             for i in range(len(case_list)):  # i：第i个用例
-                # 每个用例中字段是11个，因此这样写
-                cases_template_list[i]['id'] = case_list[i][0]
-                cases_template_list[i]['url'] = case_list[i][1]
-                cases_template_list[i]['case_name'] = case_list[i][2]
-                cases_template_list[i]['header'] = case_list[i][3]
-                cases_template_list[i]['method'] = case_list[i][4]
-                cases_template_list[i]['body'] = case_list[i][5]
-                cases_template_list[i]['expect'] = case_list[i][6]
-                cases_template_list[i]['actual'] = case_list[i][7]
-                cases_template_list[i]['valiadate'] = case_list[i][8]
-                cases_template_list[i]['is_replace'] = case_list[i][9]
-                cases_template_list[i]['is_perform'] = case_list[i][10]
+                # 每个用例中字段是5个，因此这样写
+                url_list=case_list[i][3].split(",")
+                step=case_list[i][2]
+                request_list=MyDriver.url_list_driver(url_list,step,common_value)
+                cases_template_list[i]['case_name'] = case_list[i][0]
+                cases_template_list[i]['precondition'] = case_list[i][1]
+                cases_template_list[i]['step'] = case_list[i][2]
+                cases_template_list[i]['request_list'] = request_list
+                cases_template_list[i]['assert'] = case_list[i][4]
 
             value.append({"cases": cases_template_list})
 
-
         return value
+
+
+
+
+    @exception_utils
+    def read_common(self):
+        common_value={}
+        for sheetname in self.wb.sheetnames:
+            ws = self.wb[sheetname]
+            case_list_excel = list(ws.values)
+            api_list = MyRemind.Common_Excel_manage(case_list_excel)  #格式处理器 变更模板需要变更格式处理器
+            cases_template = self.common_template * len(api_list)  # 一个sheet中用例的数量
+            cases_template_list = eval("[" + cases_template[:-1] + "]")
+
+            # aaa=[{"url":{"url":1,"name":"lu"}}]
+            for i in range(len(api_list)):  # i：第i个接口
+                # 每个用例中字段是6个，因此这样写
+                cases_template_list[i]['id'] = api_list[i][0]
+                cases_template_list[i]['api_name'] = api_list[i][1]
+                cases_template_list[i]['url'] = api_list[i][2]
+                cases_template_list[i]['method'] = api_list[i][3]
+                cases_template_list[i]['body'] = api_list[i][4]
+                cases_template_list[i]['is_replace'] = api_list[i][5]
+
+                common_value.update({f"{cases_template_list[i]['url']}": cases_template_list[i]})
+
+            return common_value
+
+
+
 
     @exception_utils
     def write_excel(self):
@@ -70,6 +101,6 @@ class ExcelUtil(BaseApi):
                     # print("ispass%s:" % j, cell.value)
                     j += 1
 
-        save_path = "%s/output/run_result_excel/运行结果_%s.xlsx" % (self.base_dir, time.strftime("%Y%m%d_%H:%M:%S"))
+        save_path = "%s/output/run_result_excel/运行结果_%s.xlsx" % (base_dir, time.strftime("%Y%m%d_%H:%M:%S"))
         self.wb.save(save_path)
 

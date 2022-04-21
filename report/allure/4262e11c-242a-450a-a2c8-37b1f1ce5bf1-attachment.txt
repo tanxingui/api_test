@@ -1,0 +1,4 @@
+[32mINFO    [0m root:BaseLog.py:52 case_name:重复申请退订失败，开始自动化运行接口用例~
+[32mINFO    [0m root:BaseLog.py:52 name：申请退订接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/apollo/user_order/apply_refund/audit，body：{'sid': '46988#701027079348721670', 'sign': '215dba328714f603f9829bc4bfe100c1', 'data': '{"id": "1110", "orderCarModels": [{"car_name": "奥迪A32019款Sportback35TFSI风尚型国V", "number": 1, "up_source_name": "lulku"}], "apply_refund_reason": 1, "apply_refund_reason_detail": "123", "apply_refund_price": 0, "apply_refund_remark": "", "apply_refund_vouchers": "https://img.suv666.com/test/autobuy/order/proof/20220418_5bn2869kba4j0.png"}'}，reponse：200
+[32mINFO    [0m root:BaseLog.py:52 开始断言~
+[32mINFO    [0m root:BaseLog.py:52 assert_type:in，actual:['该订单正在审核或已审核通过，请勿重复操作']，expected:该订单正在审核或已审核通过

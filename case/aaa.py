@@ -3,11 +3,16 @@ import json
 import os
 # from common.MyExcel_ import ExcelUtil
 from openpyxl import Workbook,load_workbook
+from common.MyExcel_ import ExcelUtil
 import re
 import random
 import hashlib
 import yaml
+import ast
+
+import queue
 from faker import   Faker
+from common.BaseDriver import BaseDriver
 
 faker=Faker("zh_CN")
 
@@ -56,26 +61,19 @@ json111='{"errcode":0,"result":{"page":1,"size":15,"total_size":168,"total_page"
 # print(str(ccc))
 # ll = [str(x).strip() for x in ccc if str(x).strip()!= '']
 
-# bath_path="/Users/luzhihao/api_test/data/yaml_case"
-# dir_list1 = os.listdir(bath_path)
-# print(dir_list1)
-list1=[{"name":1},{"mm":4}]
-list2=[{"nam2":2}]
-list3=[]
-for i in list1:
-    list3.append(i)
-for i in list2:
-    list3.append(i)
-print(list3)
-# def build_data():
-#     #单个订单待付款
-#     file_name="../data/yaml_case/case_demo.yaml"
-#     with open(file_name,"r",encoding="utf-8") as f:
-#         data = yaml.load(f,Loader=yaml.FullLoader)
-#         print(data)
-#
-# build_data()
 
+
+
+# e1=ExcelUtil("/Users/luzhihao/PycharmProjects/api_test/data/excel_case/demo.xlsx")
+# a=e1.read_excel()
+sss={"aaa":"n","mmm":1}
+# print(sss)
+# print(str(sss))
+# print(type(str(sss)))
+
+asd={"aa":""}
+print(type(asd["aa"]))
+print(asd["aa"]=="")
 
 
 

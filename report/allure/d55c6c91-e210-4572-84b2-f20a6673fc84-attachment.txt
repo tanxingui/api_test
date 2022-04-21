@@ -1,0 +1,4 @@
+[32mINFO    [0m root:BaseLog.py:52 case_name:编辑活动有效期不能早于当前时间，开始自动化运行接口用例~
+[32mINFO    [0m root:BaseLog.py:52 name：编辑活动接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/dealer_shop_activity/send_coupon/edit，body：{'sid': '46988#701027080833506309', 'sign': 'efe29fee06fac2ac7568ca2d9da55561', 'data': '{"id": 88, "name": "卢卢购车数量", "expire_type": 2, "from_time": "2022-04-16 00:00:00", "end_time": "2022-04-16 23:59:59", "trigger_limit": -1, "trigger_type": 6, "trigger_value": 1, "trigger_duration": 3, "deliver_time": 1, "ref_coupons_list": [{"id": 307, "coupon_id": 151, "give_num": 1, "coupon_type": 4, "coupon_worth": 500000}]}'}，reponse：200
+[32mINFO    [0m root:BaseLog.py:52 开始断言~
+[32mINFO    [0m root:BaseLog.py:52 assert_type:in，actual:['活动开始时间不能早于当前时间']，expected:活动开始时间不能早于当前时间

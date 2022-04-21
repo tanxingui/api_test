@@ -41,9 +41,12 @@ def handler(excel_name):
 def merge_yaml():
     """合并全部用例一起执行"""
     excel=[]
-    dir_list = os.listdir(yaml_dir+"/create_2B_data")
-    for i in dir_list:
-        yaml_file = os.path.join(yaml_dir, i)
-        for j in read_yaml(yaml_file)["cases"]:
-            excel.append(j)
+    data_list=os.listdir(yaml_dir)
+    for index,data in enumerate(data_list[1:]):
+        work_dir=yaml_dir+"/"+data
+        dir_list = os.listdir(work_dir)
+        for i in dir_list:
+            yaml_file = os.path.join(work_dir, i)
+            for j in read_yaml(yaml_file)["cases"]:
+                excel.append(j)
     return excel

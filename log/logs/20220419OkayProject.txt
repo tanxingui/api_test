@@ -1,0 +1,24 @@
+[2022-04-19 10:39:29] [INFO] case_name:重复申请退订失败，开始自动化运行接口用例~
+[2022-04-19 10:39:29] [INFO] name：申请退订接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/apollo/user_order/apply_refund/audit，body：{'sid': '46988#701019063740176387', 'sign': '17d2cd788374db42c5336a938d364591', 'data': '{"id": "1110", "orderCarModels": [{"car_name": "奥迪A32019款Sportback35TFSI风尚型国V", "number": 1, "up_source_name": "lulku"}], "apply_refund_reason": 1, "apply_refund_reason_detail": "123", "apply_refund_price": 0, "apply_refund_remark": "", "apply_refund_vouchers": "https://img.suv666.com/test/autobuy/order/proof/20220418_5bn2869kba4j0.png"}'}，reponse：200
+[2022-04-19 10:39:29] [INFO] 开始断言~
+[2022-04-19 10:39:29] [INFO] assert_type:in，actual:['该订单正在审核或已审核通过，请勿重复操作']，expected:该订单正在审核或已审核通过
+[2022-04-19 10:39:29] [INFO] case_name:编辑活动有效期不能早于当前时间，开始自动化运行接口用例~
+[2022-04-19 10:39:29] [INFO] name：编辑活动接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/dealer_shop_activity/send_coupon/edit，body：{'sid': '46988#701019064927164420', 'sign': 'a63d4d1bdba368d0b942378d45dbe000', 'data': '{"id": 88, "name": "卢卢购车数量", "expire_type": 2, "from_time": "2022-04-16 00:00:00", "end_time": "2022-04-16 23:59:59", "trigger_limit": -1, "trigger_type": 6, "trigger_value": 1, "trigger_duration": 3, "deliver_time": 1, "ref_coupons_list": [{"id": 307, "coupon_id": 151, "give_num": 1, "coupon_type": 4, "coupon_worth": 500000}]}'}，reponse：200
+[2022-04-19 10:39:29] [INFO] 开始断言~
+[2022-04-19 10:39:29] [INFO] assert_type:in，actual:['活动开始时间不能早于当前时间']，expected:活动开始时间不能早于当前时间
+[2022-04-19 11:11:20] [INFO] case_name:重复申请退订失败，开始自动化运行接口用例~
+[2022-04-19 11:11:20] [INFO] name：申请退订接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/apollo/user_order/apply_refund/audit，body：{'sid': '46988#701027079348721670', 'sign': '215dba328714f603f9829bc4bfe100c1', 'data': '{"id": "1110", "orderCarModels": [{"car_name": "奥迪A32019款Sportback35TFSI风尚型国V", "number": 1, "up_source_name": "lulku"}], "apply_refund_reason": 1, "apply_refund_reason_detail": "123", "apply_refund_price": 0, "apply_refund_remark": "", "apply_refund_vouchers": "https://img.suv666.com/test/autobuy/order/proof/20220418_5bn2869kba4j0.png"}'}，reponse：200
+[2022-04-19 11:11:20] [INFO] 开始断言~
+[2022-04-19 11:11:20] [INFO] assert_type:in，actual:['该订单正在审核或已审核通过，请勿重复操作']，expected:该订单正在审核或已审核通过
+[2022-04-19 11:11:20] [INFO] case_name:编辑活动有效期不能早于当前时间，开始自动化运行接口用例~
+[2022-04-19 11:11:20] [INFO] name：编辑活动接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/dealer_shop_activity/send_coupon/edit，body：{'sid': '46988#701027080833506309', 'sign': 'efe29fee06fac2ac7568ca2d9da55561', 'data': '{"id": 88, "name": "卢卢购车数量", "expire_type": 2, "from_time": "2022-04-16 00:00:00", "end_time": "2022-04-16 23:59:59", "trigger_limit": -1, "trigger_type": 6, "trigger_value": 1, "trigger_duration": 3, "deliver_time": 1, "ref_coupons_list": [{"id": 307, "coupon_id": 151, "give_num": 1, "coupon_type": 4, "coupon_worth": 500000}]}'}，reponse：200
+[2022-04-19 11:11:20] [INFO] 开始断言~
+[2022-04-19 11:11:20] [INFO] assert_type:in，actual:['活动开始时间不能早于当前时间']，expected:活动开始时间不能早于当前时间
+[2022-04-19 15:30:10] [INFO] case_name:重复申请退订失败，开始自动化运行接口用例~
+[2022-04-19 15:30:10] [INFO] name：申请退订接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/apollo/user_order/apply_refund/audit，body：{'sid': '46988#701092217326050304', 'sign': '2604d7340698a6b44d78a327f0d3ddfa', 'data': '{"id": "1110", "orderCarModels": [{"car_name": "奥迪A32019款Sportback35TFSI风尚型国V", "number": 1, "up_source_name": "lulku"}], "apply_refund_reason": 1, "apply_refund_reason_detail": "123", "apply_refund_price": 0, "apply_refund_remark": "", "apply_refund_vouchers": "https://img.suv666.com/test/autobuy/order/proof/20220418_5bn2869kba4j0.png"}'}，reponse：200
+[2022-04-19 15:30:10] [INFO] 开始断言~
+[2022-04-19 15:30:10] [INFO] assert_type:in，actual:['该订单正在审核或已审核通过，请勿重复操作']，expected:该订单正在审核或已审核通过
+[2022-04-19 15:30:10] [INFO] case_name:编辑活动有效期不能早于当前时间，开始自动化运行接口用例~
+[2022-04-19 15:30:10] [INFO] name：编辑活动接口，url：https://api.s.youcheyihou.com/testapi/iyourcar_autobuy/backend/dealer_shop_activity/send_coupon/edit，body：{'sid': '46988#701092219171544065', 'sign': '46b013eebf76af172663582f45a93214', 'data': '{"id": 88, "name": "卢卢购车数量", "expire_type": 2, "from_time": "2022-04-16 00:00:00", "end_time": "2022-04-16 23:59:59", "trigger_limit": -1, "trigger_type": 6, "trigger_value": 1, "trigger_duration": 3, "deliver_time": 1, "ref_coupons_list": [{"id": 307, "coupon_id": 151, "give_num": 1, "coupon_type": 4, "coupon_worth": 500000}]}'}，reponse：200
+[2022-04-19 15:30:10] [INFO] 开始断言~
+[2022-04-19 15:30:10] [INFO] assert_type:in，actual:['活动开始时间不能早于当前时间']，expected:活动开始时间不能早于当前时间

@@ -21,3 +21,5 @@ report_dir = os.path.join(base_dir, "report", "result")
 
 log_path = os.path.join(log_dir,"api.log")
 
+aaaaaa=os.listdir(yaml_dir)
+
