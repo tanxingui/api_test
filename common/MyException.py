@@ -1,6 +1,6 @@
 import traceback
 from functools import wraps
-from common.BaseRemind import Remind
+from checkout.BaseRemind import Remind
 Remind=Remind()
 def exception_utils(func):
     """处理异常的装饰器"""
