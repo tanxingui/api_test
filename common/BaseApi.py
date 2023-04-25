@@ -1,4 +1,3 @@
-
 import requests
 import hashlib
 from common.MyGlobal import Global
@@ -58,7 +57,7 @@ class BaseApi(object):
                     timeout=10
                     ):
 
-        formdata = self.get_formdata(data, is_replace)
+        formdata = self.get_formdata(data)
         result = self.request(url, formdata, method=method, verify=verify, timeout=timeout)
         log_text = "name：%s，url：%s，body：%s，reponse：%s" % (name, url, formdata,result.status_code)
         MyLog.info(log_text)
@@ -69,8 +68,8 @@ class BaseApi(object):
 
 
     @exception_utils
-    def get_formdata(self, data, is_replace):
-        data = MyReplace.replace_case_with_re(data, is_replace)
+    def get_formdata(self, data):
+        data = MyReplace.replace_case_with_re(data)
         sign = hashlib.md5((MyGlobal.getToken() + data).encode("utf-8")).hexdigest()
         MyGlobal.setSign(sign)
         formdata = {

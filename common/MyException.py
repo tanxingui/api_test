@@ -4,7 +4,7 @@ from checkout.BaseRemind import Remind
 Remind=Remind()
 def exception_utils(func):
     """处理异常的装饰器"""
-    @wraps(func)
+    @wraps(func)    # wraps函数是为了解决函数使用装饰器修饰时丢失本身的一些属性而出现的
     def wraped(*args, **kwargs):
         try:
             return func(*args, **kwargs)

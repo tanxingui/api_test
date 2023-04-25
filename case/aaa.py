@@ -71,13 +71,16 @@ sss={"aaa":"n","mmm":1}
 # print(str(sss))
 # print(type(str(sss)))
 
-asd={"aa":""}
-print(type(asd["aa"]))
-print(asd["aa"]=="")
+asd='{"aa":"#haha#","bb":"#kiki#"}'
+sss2=re.findall('#(.*?)#', asd)
+print(sss2)
 
-
-
-
+xingui = [1, 5, 3, 20, 7, 5, 32, 3]
+for i in range(len(xingui)):
+    for o in range(len(xingui)-1):
+        if xingui[o] > xingui[o + 1]:
+            xingui[o],xingui[o+1] = xingui[o+1],xingui[o]
+print(xingui)
 
 
 

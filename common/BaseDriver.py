@@ -2,11 +2,13 @@ import ast
 import re
 import queue
 import json
-
+from common.MyException import *
 request_queue = queue.Queue()
 class BaseDriver:
     def __init__(self):
         self.request_template = """{"name":"","url":"","method":"","body":"","is_replace":""}"""
+
+    @exception_utils
     def url_driver(self,url,body_key,common_dict):
         """common_dict=[{"url":{dict}}]"""
 
@@ -39,7 +41,7 @@ class BaseDriver:
         request_queue.put(template)
         return template
 
-
+    @exception_utils
     def url_list_driver(self,url_list,step,common_dict):
         request_list = []
         body_key_list = step.split(r",")
@@ -54,7 +56,7 @@ class BaseDriver:
             request_list.append(request_queue.get())
         return request_list
 
-
+    @exception_utils
     def body_enum(self,common_result,body_key):
         body_dict=ast.literal_eval(common_result["body"])
         # key_list = re.findall(r'&(.+?),', step)

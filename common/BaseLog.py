@@ -60,7 +60,7 @@ class LogUtil(object):
     def error(self, message):
         self.logger.error(message)
 # 添加日志
-# name="卢志豪"
+# name="谭新贵"
 # url="http：//"
 # rep={"data":""}
 # log_text = "name：%s，url：%s，reponse：%s" % (name, url, rep)

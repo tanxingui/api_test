@@ -4,7 +4,9 @@ from common.MyException import exception_utils
 from common.BaseApi import BaseApi
 from checkout.BaseRemind import Remind
 from common.BaseDriver import BaseDriver
+from common.text_util import read_txt_handel
 from config.mypath import *
+import time
 
 MyRemind=Remind()
 MyDriver=BaseDriver()

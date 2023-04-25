@@ -28,7 +28,7 @@ class Remind:
     def Excel_Checker(self,case_list):
         """校验器"""
         key_list = ["case_name", "precondition", "step", "request_list", "assert"]
-        for index, data in enumerate(case_list):
+        for index, data in enumerate(case_list):  # 遍历caselist的枚举和值
             #type(data[2]) != str or data[2] == None
             if type(data[0]) != str or data[0] == None:
                 self.format_error(key_list[0], int)
@@ -69,9 +69,9 @@ class Remind:
                 self.format_error(key_list[5], str)
                 raise
     def format_case_list(self, case_list):
-        """# 志豪获得id为空的case的索引
+        """# 获得id为空的case的索引
            # 新列表的概念
-           # 志豪取前11位成一个新列表
+           # 取前11位成一个新列表
         """
         for case_index, tuple_data in enumerate(case_list):
             str_list = list(tuple_data)
@@ -92,7 +92,11 @@ class Remind:
         return case_list
 
     def format_time(self,str):
-        mmm = re.findall('time":"(.*?)"', str)
+        from_time = re.findall('from_time":"(.*?)"', str)
+        end_time= re.findall('end_time":"(.*?)"', str)
+        pay_time = re.findall('pay_time":"(.*?)"', str)
+        sign_time= re.findall('sign_time":"(.*?)"', str)
+        mmm=from_time+end_time+pay_time+sign_time
         if mmm==[]:
             return str
         else:
@@ -124,4 +128,4 @@ class Remind:
         return "参数错误"
 
     def param_ok(self,data):
-        return '你好，志豪，今天过得怎么样？已完成创建'+data+"数据"
+        return '你好，新贵，今天过得怎么样？已完成创建'+data+"数据"

@@ -1,4 +1,6 @@
 import pymysql
+from adodbapi.examples.db_print import db
+
 from config.myconf import MyConf
 import os
 from config.mypath import path_dir

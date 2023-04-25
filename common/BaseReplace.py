@@ -1,5 +1,6 @@
 import jsonpath
 import ast
+import re
 from common.MyException import exception_utils
 from faker import Faker
 faker=Faker()
@@ -31,18 +32,17 @@ class Replace_data():
     def get_random_name(self):
         return faker.name()
     @exception_utils
-    def replace_case_with_re(self,Data,is_replace):
+    def replace_case_with_re(self,Data):
         """{"id":"$#/iyourcar_autobuy/backend/apollo/user_order/list__id#"}"""
         if Data.count("$")==0:
             return Data
         else:
-            rely_list=self.set_rely_list(is_replace)
+            #正则获取出一个列表，只负责拿
+            rely_list = self.is_rely(Data)
             num=Data.count("$")
-            # aaa=self.rely_list
             index = 0
             for i in range(num):
                 """随时调用字典的值"""
-                sss=rely_list[index]
 
                 if "$#phone#" in Data:
                     Data = Data.replace(f"$#phone#", f"{self.get_random_phone()}")
@@ -64,7 +64,13 @@ class Replace_data():
                     continue
 
     @exception_utils
+    def is_rely(self,data):
+        sss=re.findall('#(.*?)#', data)
+        return sss
+
+    @exception_utils
     def extract_data(self,result_dict,is_replace):
+        #负责装进去
         is_replace_list = ast.literal_eval(is_replace)
         for index,i in enumerate(is_replace_list):
             """判断是否需要替换"""
@@ -77,16 +83,16 @@ class Replace_data():
                 else:
                     self.add_replace_dict(key,name[0])
 
-    @exception_utils
-    def set_rely_list(self,is_replace):
-        """设置依赖url列表"""
-        rely_list=[]
-        is_replace_list = ast.literal_eval(is_replace)
-        for index, dict in enumerate(is_replace_list):
-            if dict.__contains__("rely_list"):
-                for j in dict["rely_list"]:
-                    rely_list.append(j["url"])
-        return rely_list
+    # @exception_utils
+    # def set_rely_list(self,is_replace):
+    #     """设置依赖url列表"""
+    #     rely_list=[]
+    #     is_replace_list = ast.literal_eval(is_replace)
+    #     for index, dict in enumerate(is_replace_list):
+    #         if dict.__contains__("rely_list"):
+    #             for j in dict["rely_list"]:
+    #                 rely_list.append(j["url"])
+    #     return rely_list
 
 
 
